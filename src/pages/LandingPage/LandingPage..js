@@ -5,8 +5,10 @@ import SizedBox from "../../components/SizedBox";
 import Button from "../../components/Button";
 import checkIconSrc from "../../assets/icons/check-mono.svg";
 import SvgIcon from "../../components/SvgIcon";
+import { useNavigate } from "react-router";
 
 export default function LandingPage() {
+  let navigate = useNavigate();
   const sections = [
     {
       title: "01. 다양한 접수 대행",
@@ -23,6 +25,28 @@ export default function LandingPage() {
       가능합니다.`,
     },
   ];
+
+  const handleCreateBtnClick = () => {
+    navigate("/create/1");
+  };
+
+  const handleBrousingBtnClick = () => {
+    navigate("/events");
+  };
+
+  const DefaultBtnStyle = {
+    // 외곽선
+    border: "0.5px solid var(--dark-mint)",
+    color: "var(--dark-mint)",
+    bgColor: "var(--white)",
+  };
+
+  const FilledBtnStyle = {
+    // 민트색 버튼
+    border: "none",
+    color: "var(--white)",
+    bgColor: "var(--dark-mint)",
+  };
   return (
     <LandingPageLayout>
       <SizedBox height={"10rem"} />
@@ -37,8 +61,12 @@ export default function LandingPage() {
         </BodyRegular>
         <SizedBox height={"5rem"} />
         <Row>
-          <Button>행사 생성하기</Button>
-          <Button filled>행사 둘러보기</Button>
+          <Button style={DefaultBtnStyle} onClick={handleCreateBtnClick}>
+            행사 생성하기
+          </Button>
+          <Button style={FilledBtnStyle} onClick={handleBrousingBtnClick}>
+            행사 둘러보기
+          </Button>
         </Row>
       </Box>
       <SizedBox height={"5rem"} />

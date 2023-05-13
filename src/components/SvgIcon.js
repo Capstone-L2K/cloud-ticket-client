@@ -5,7 +5,12 @@ import { css } from "styled-components";
 const SvgIcon = ({ src, size, onClick }) => {
   return (
     <IconContainer onClick={onClick}>
-      <img src={src} width={size} height={size} onClick={onClick} />
+      <img
+        src={src}
+        width={size ? size : "50px"}
+        height={size ? size : "50px"}
+        onClick={onClick}
+      />
     </IconContainer>
   );
 };

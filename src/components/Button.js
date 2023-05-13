@@ -4,12 +4,12 @@ import { Title, TextButton } from "../styles/fonts/Typography";
 export default function Button({
   onClick,
   children,
-  filled = false,
+  style,
   width = "15rem",
   height = "5rem",
 }) {
   return (
-    <Btn onClick={onClick} filled={filled} width={width} height={height}>
+    <Btn onClick={onClick} width={width} height={height} style={style}>
       <TextButton>{children} </TextButton>
     </Btn>
   );
@@ -21,18 +21,15 @@ const Btn = styled.button`
   justify-content: center;
   align-items: center;
 
-  border-width: 5px;
   border-radius: var(--border-radius);
-  border-color: red;
-  border: ${({ filled }) => (filled ? `none` : `0.5px solid var(--dark-mint)`)};
 
-  background-color: ${({ filled }) =>
-    filled ? `var(--dark-mint)` : `var(--white)`};
+  border: ${({ style }) => style.border};
 
-  color: ${({ filled }) => (filled ? `var(--white)` : `var(--dark-mint)`)};
+  background-color: ${({ style }) => style.bgColor};
 
-  width: ${({ width }) => (width ? width : "6rem")};
-  height: ${({ height }) => (height ? height : "2rem")};
+  color: ${({ style }) => style.color};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 
   cursor: pointer;
 `;
