@@ -2,6 +2,7 @@
 
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
+
 const GlobalStyle = createGlobalStyle`
 
 ${normalize}
@@ -10,23 +11,14 @@ ${normalize}
     box-sizing: border-box;
   
   }
-  :root{
-    font-size:10px; // 1rem = 10px; 
-
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-
-    
-
-   
-
-  }
+ 
   body {
-
+    
     margin: 0;
     padding: 0;
     width:100vw;
     height: 100vh;
-    
+ 
     // color system 
 
     --main : #64E1CA; 
@@ -43,13 +35,14 @@ ${normalize}
     --gray150:#ebebeb;
     --white : #ffffff;
 
-    --font-size-xl: clamp(2rem, 7vw, 2.5rem); /*35px*/
-    --font-size-lg: clamp(1rem, 6vw, 2.5rem); /*30px*/
-    --font-size-ml: clamp(1rem, 5vw, 2rem); /*25px*/
-    --font-size-md: clamp(1rem, 4vw, 1.5rem); /*20px*/
-    --font-size-ms: clamp(1rem, 3vw, 1.5rem); /*15px*/
-    --font-size-sm: clamp(1rem, 1vw, 1.5rem); /*10px*/
+    --font-size-xl: clamp(2rem, 8vw, 5rem); /*35px*/
+    --font-size-lg: clamp(1rem, 7vw, 5rem); /*30px*/
+    --font-size-ml: clamp(1rem, 6vw, 3rem); /*25px*/
+    --font-size-md: clamp(1rem, 5vw, 3rem); /*20px*/
+    --font-size-ms: clamp(1rem, 4vw, 2rem); /*15px*/
+    --font-size-sm: clamp(1rem, 2vw, 2rem); /*10px*/
    
+    --border-radius : 5px;
   }
 
  
