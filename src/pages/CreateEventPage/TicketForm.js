@@ -22,6 +22,7 @@ import UnCheckIconSrc from "../../assets/icons/uncheck.svg";
 export default function TicketForm({ setStep }) {
   const createEvent = () => {
     // 이벤트 생성 요청
+    setStep(3);
   };
   const back = () => {
     setStep(1);

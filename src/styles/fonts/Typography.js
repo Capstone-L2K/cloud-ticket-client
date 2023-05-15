@@ -67,6 +67,26 @@ const BodySmall = styled.h5`
   letter-spacing: -0.022em;
 `;
 
+const BodyXSmall = styled.h5`
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 300;
+  font-size: var(--font-size-xs);
+  margin: 0;
+  color: ${({ color }) => (color ? color : `var(--gray400)`)};
+  line-height: 150%;
+  /* or 38px */
+
+  letter-spacing: -0.022em;
+`;
+const Caption = styled.h6`
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 200;
+  font-size: var(--font-size-xs);
+  color: ${({ color }) => (color ? color : `var(--gray200)`)};
+  margin: 0;
+`;
 const TextButton = styled.h6`
   font-family: "Noto Sans KR";
   font-style: normal;
@@ -75,4 +95,13 @@ const TextButton = styled.h6`
   margin: 0;
 `;
 
-export { Title, Subtitle, BodyLarge, BodyRegular, BodySmall, TextButton };
+export {
+  Title,
+  Subtitle,
+  BodyLarge,
+  BodyRegular,
+  BodySmall,
+  TextButton,
+  Caption,
+  BodyXSmall,
+};

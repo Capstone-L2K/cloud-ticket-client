@@ -9,6 +9,7 @@ import HostForm from "./HostForm";
 import EventForm from "./EventForm";
 import TicketForm from "./TicketForm";
 import { useNavigate } from "react-router";
+import CreateCompleted from "./CreateCompleted";
 
 export default function CreateEventPage() {
   const [step, setStep] = useState(0);
@@ -25,6 +26,7 @@ export default function CreateEventPage() {
     <HostForm setStep={setStep} hostInputs={hostInputs} />,
     <EventForm setStep={setStep} eventInputs={eventInputs} />,
     <TicketForm setStep={setStep} ticketInputs={ticketInputs} />,
+    <CreateCompleted />,
   ];
 
   return (

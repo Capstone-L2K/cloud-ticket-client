@@ -35,13 +35,13 @@ ${normalize}
     --gray150:#ebebeb;
     --white : #ffffff;
 
-    --font-size-xl: clamp(2rem, 7vw, 5rem); /*35px*/
-    --font-size-lg: clamp(1rem, 6vw, 5rem); /*30px*/
-    --font-size-ml: clamp(1rem, 5vw, 3rem); /*25px*/
-    --font-size-md: clamp(1rem, 4vw, 3rem); /*20px*/
-    --font-size-ms: clamp(1rem, 3vw, 2rem); /*15px*/
-    --font-size-sm: clamp(1rem, 2vw, 2rem); /*10px*/
-   
+    --font-size-xl: clamp(2rem, 7vw, 5rem); 
+    --font-size-lg: clamp(1rem, 6vw, 5rem); 
+    --font-size-ml: clamp(1rem, 5vw, 3rem);
+    --font-size-md: clamp(1rem, 4vw, 3rem); 
+    --font-size-ms: clamp(1rem, 3vw, 2rem); 
+    --font-size-sm: clamp(1rem, 2vw, 2rem); 
+    --font-size-xs: clamp(0.5rem, 5px, 2rem); 
     --border-radius : 5px;
   }
 
