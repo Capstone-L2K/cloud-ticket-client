@@ -34,7 +34,7 @@ export default function App() {
 
         {/* 인증을 반드시 해야지만 접속 가능한 페이지 정의 */}
         <Route element={<PrivateRoute authentication={true} />}>
-          <Route path="/create/*" element={<CreateEventPage />} />
+          <Route path="/event/create" element={<CreateEventPage />} />
         </Route>
 
         {/* 매칭되지 않는 url 경로 접근시 */}
@@ -47,11 +47,10 @@ export default function App() {
 const AppLayout = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
-  overflow-x: hidden;
 `;

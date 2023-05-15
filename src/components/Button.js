@@ -5,8 +5,8 @@ export default function Button({
   onClick,
   children,
   style,
-  width = "15rem",
-  height = "5rem",
+  width = "9rem",
+  height = "3rem",
 }) {
   return (
     <Btn onClick={onClick} width={width} height={height} style={style}>

@@ -12,9 +12,9 @@ export default function PrivateRoute({ authentication }) {
   if (authentication) {
     // 인증이 반드시 필요한 페이지
 
-    alert("로그인이 필요한 페이지 입니다.");
     // 인증을 안했을 경우 로그인 페이지로, 했을 경우 해당 페이지로
     if (isAuthenticated === null || isAuthenticated === "false") {
+      alert("로그인이 필요한 페이지 입니다.");
       return <Navigate to="/login" />;
     } else {
       return <Outlet />;

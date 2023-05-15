@@ -27,11 +27,11 @@ export default function LandingPage() {
   ];
 
   const handleCreateBtnClick = () => {
-    navigate("/create/1");
+    navigate("/event/create");
   };
 
   const handleBrousingBtnClick = () => {
-    navigate("/events");
+    navigate("/event");
   };
 
   const DefaultBtnStyle = {
@@ -49,12 +49,12 @@ export default function LandingPage() {
   };
   return (
     <LandingPageLayout>
-      <SizedBox height={"10rem"} />
+      <SizedBox height={"5rem"} />
       <Box>
         <Title>
           오프라인 행사 입장 관리는 <br /> 이제 클라우드 티켓에서
         </Title>
-        <SizedBox height={"5rem"} />
+        <SizedBox height={"2rem"} />
         <BodyRegular>
           티켓 등록부터 검수까지 <br />
           모두 클라우드 티켓과 함께!
@@ -74,7 +74,7 @@ export default function LandingPage() {
         <Title>
           행사, 더이상 복잡하게 <br /> 관리하지 마세요
         </Title>
-        <SizedBox height={"5rem"} />
+        <SizedBox height={"2rem"} />
         <BodyRegular>
           행사 시작부터 끝까지 클라우드 티켓이 도와드릴게요. 클라우드 티켓을
           사용하면 참가자 입장 및 관리와 관련된 모든 기능들을 쉽고 빠르게 이용할
