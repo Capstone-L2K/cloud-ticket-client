@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import useInput from "../../hooks/useInput";
 import { SCREEN_PADDING } from "../../styles/style";
-import { SubmitButton } from "./form/SubmitBtn";
+import { SquareBtn } from "./form/SquareBtn";
 import { Input } from "./form/Input";
 export default function HostForm({ setStep, hostInputs }) {
   let navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function HostForm({ setStep, hostInputs }) {
           <Input value={phoneNumber} onChange={handlePhoneNumberChange} />
         </Box>
       </Form>
-      <SubmitButton onClick={handleSubmitHostForm}>다음</SubmitButton>
+      <SquareBtn onClick={handleSubmitHostForm}>다음</SquareBtn>
     </HostFormLayout>
   );
 }

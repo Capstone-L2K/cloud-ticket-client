@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // 100;300;400;500;700;900
-const Title = styled.h1`
+const Title = styled.header`
   font-family: "Noto Sans KR";
   font-weight: 900;
   font-size: var(--font-size-xl);
@@ -84,7 +84,7 @@ const Caption = styled.h6`
   font-style: normal;
   font-weight: 200;
   font-size: var(--font-size-xs);
-  color: ${({ color }) => (color ? color : `var(--gray200)`)};
+  color: ${({ color }) => (color ? color : `var(--gray300)`)};
   margin: 0;
 `;
 const TextButton = styled.h6`

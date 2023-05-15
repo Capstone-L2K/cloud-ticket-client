@@ -12,12 +12,18 @@ import Poster1Src from "../../assets/demo/poster1.png";
 import Poster2Src from "../../assets/demo/poster2.png";
 import Poster3Src from "../../assets/demo/poster3.png";
 import Poster4Src from "../../assets/demo/poster4.png";
+import { useNavigate } from "react-router";
 export default function EventCard({ event }) {
-  const { img_src, name, datetime_string, place, num_of_persons } = event;
+  const { id, img_src, name, datetime_string, place, num_of_persons } = event;
 
   const posters = [Poster1Src, Poster2Src, Poster3Src, Poster4Src];
+
+  let navigate = useNavigate();
+  const moveToDetailPage = () => {
+    navigate(`/event/${id}`);
+  };
   return (
-    <Box>
+    <Box onClick={moveToDetailPage}>
       <img src={posters[img_src]} width={"100%"} height={"auto"} />
       <BodySmall>{name}</BodySmall>
       <BodyXSmall>{datetime_string}</BodyXSmall>
@@ -36,7 +42,7 @@ const Box = styled.div`
 
   gap: 2px;
   width: 45%;
-  height: 120px;
+  height: 200px;
 `;
 
 const Row = styled.div`

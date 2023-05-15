@@ -41,7 +41,7 @@ ${normalize}
     --font-size-md: clamp(1rem, 4vw, 3rem); 
     --font-size-ms: clamp(1rem, 3vw, 2rem); 
     --font-size-sm: clamp(1rem, 2vw, 2rem); 
-    --font-size-xs: clamp(0.5rem, 5px, 2rem); 
+    --font-size-xs: clamp(0.5rem, 1vw, 2rem); 
     --border-radius : 5px;
   }
 

@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router";
 import useInput from "../../hooks/useInput";
 import { SCREEN_PADDING } from "../../styles/style";
-import { SubmitButton } from "./form/SubmitBtn";
+import { SquareBtn } from "./form/SquareBtn";
 import { Input } from "./form/Input";
 import SvgIcon from "../../components/SvgIcon";
 import BackIconSrc from "../../assets/icons/back.svg";
@@ -107,7 +107,7 @@ export default function TicketForm({ setStep }) {
           </CustomBodyRegular>
         </Row>
       </Form>
-      <SubmitButton onClick={createEvent}>이벤트 생성하기</SubmitButton>
+      <SquareBtn onClick={createEvent}>이벤트 생성하기</SquareBtn>
     </TicketFormLayout>
   );
 }

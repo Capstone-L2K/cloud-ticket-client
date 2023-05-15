@@ -12,12 +12,13 @@ import useInput from "../../hooks/useInput";
 import SvgIcon from "../../components/SvgIcon";
 import ImageIconSrc from "../../assets/icons/image.svg";
 import { SCREEN_PADDING } from "../../styles/style";
-import { SubmitButton } from "./form/SubmitBtn";
+import { SquareBtn } from "./form/SquareBtn";
 import ImagePicker from "./form/ImagePicker";
 import BackIconSrc from "../../assets/icons/back.svg";
 import DateInput from "./form/DateInput";
 import { Input } from "./form/Input";
 import TimePicker from "./form/TimeInput";
+
 export default function EventForm({ setStep, eventInputs }) {
   let navigate = useNavigate();
 
@@ -78,7 +79,7 @@ export default function EventForm({ setStep, eventInputs }) {
           <Input />
         </Box>
       </Form>
-      <SubmitButton onClick={handleSubmitEventForm}>다음</SubmitButton>
+      <SquareBtn onClick={handleSubmitEventForm}>다음</SquareBtn>
     </EventFormLayout>
   );
 }

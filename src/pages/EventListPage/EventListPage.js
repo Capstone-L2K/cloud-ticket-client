@@ -4,6 +4,8 @@ import EventLists from "../../db/EventData.json";
 import styled from "styled-components";
 import { Title, BodyRegular } from "../../styles/fonts/Typography";
 import SizedBox from "../../components/SizedBox";
+import SearchIconSrc from "../../assets/icons/search.svg";
+import SvgIcon from "../../components/SvgIcon";
 function EventListPage() {
   return (
     <EventListPageLayout>
@@ -12,7 +14,7 @@ function EventListPage() {
       <SizedBox height="30px" />
       <EventList>
         {EventLists.map((e) => (
-          <EventCard event={e} />
+          <EventCard event={e} key={e.id} />
         ))}
       </EventList>
     </EventListPageLayout>
@@ -20,12 +22,20 @@ function EventListPage() {
 }
 
 export default EventListPage;
+
+function Search() {
+  return (
+    <Row>
+      <SvgIcon src={SearchIconSrc} />
+    </Row>
+  );
+}
 const EventListPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100%;
+
   width: 100%;
   padding-top: 30px;
 `;
@@ -39,4 +49,11 @@ const EventList = styled.div`
   height: 100%;
   width: 100%;
   gap: 150px 30px;
+`;
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 `;
