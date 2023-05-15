@@ -7,8 +7,8 @@ const SvgIcon = ({ src, size, onClick }) => {
     <IconContainer onClick={onClick}>
       <img
         src={src}
-        width={size ? size : "50px"}
-        height={size ? size : "50px"}
+        width={size ? size : "24px"}
+        height={size ? size : "24px"}
         onClick={onClick}
       />
     </IconContainer>

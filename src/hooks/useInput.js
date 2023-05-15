@@ -5,6 +5,7 @@ const useInput = (initialValue) => {
   const handler = useCallback((e) => {
     setValue(e.target.value);
   }, []);
+
   return [value, handler, setValue];
 };
 
