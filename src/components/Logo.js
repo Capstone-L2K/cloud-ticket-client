@@ -4,14 +4,14 @@ import LogoSrc from "../assets/images/logo.svg";
 import SvgIcon from "./SvgIcon";
 import { Subtitle } from "../styles/fonts/Typography";
 
-export default function Logo({ size }) {
+export default function Logo({ size, color }) {
   const sizes = {
     s: "30px",
   };
   return (
     <LogoLayout>
       <SvgIcon src={LogoSrc} size={sizes[size]} />
-      <Subtitle>Eventicket</Subtitle>
+      <Subtitle color={color}>Cloud Ticket</Subtitle>
     </LogoLayout>
   );
 }
