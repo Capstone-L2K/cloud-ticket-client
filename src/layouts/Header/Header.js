@@ -21,7 +21,11 @@ export default function Header() {
     <HeaderLayout>
       <Logo size={"s"} />
       {menuModalVisible && (
-        <MenuModal isOpen={menuModalVisible} closeModal={closeMenuModal}>
+        <MenuModal
+          isOpen={menuModalVisible}
+          closeModal={closeMenuModal}
+          setIsOpen={setMenuModalVisible}
+        >
           <div>안녕하세요!</div>
         </MenuModal>
       )}

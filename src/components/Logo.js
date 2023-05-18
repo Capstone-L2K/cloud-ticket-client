@@ -4,12 +4,12 @@ import LogoSrc from "../assets/images/logo.svg";
 import SvgIcon from "./SvgIcon";
 import { Subtitle } from "../styles/fonts/Typography";
 
-export default function Logo({ size, color }) {
+export default function Logo({ size, color, onClick }) {
   const sizes = {
     s: "30px",
   };
   return (
-    <LogoLayout>
+    <LogoLayout onClick={onClick}>
       <SvgIcon src={LogoSrc} size={sizes[size]} />
       <Subtitle color={color}>Cloud Ticket</Subtitle>
     </LogoLayout>
