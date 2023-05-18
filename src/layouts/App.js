@@ -10,7 +10,11 @@ import {
   LoginPage,
   EventListPage,
   EventDetailPage,
+  HostEventPage,
+  JoinEventPage,
+  ReserveTicketPage,
 } from "../pages";
+
 import PrivateRoute from "../utils/PrivateRoute";
 import { Routes, Route } from "react-router";
 
@@ -33,12 +37,15 @@ export default function App() {
         {/* 인증을 반드시 하지 않아야만 접속 가능한 페이지 정의 */}
         <Route element={<PrivateRoute authentication={false} />}>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
-        <Route path="/register" element={<RegisterPage />} />
 
         {/* 인증을 반드시 해야지만 접속 가능한 페이지 정의 */}
         <Route element={<PrivateRoute authentication={true} />}>
           <Route path="/event/create" element={<CreateEventPage />} />
+          <Route path="/event/join" element={<JoinEventPage />} />
+          <Route path="/event/host" element={<HostEventPage />} />
+          <Route path="/event/:id/reserve" element={<ReserveTicketPage />} />
         </Route>
 
         {/* 매칭되지 않는 url 경로 접근시 */}
@@ -57,4 +64,5 @@ const AppLayout = styled.div`
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
+  overflow-x: hidden;
 `;
