@@ -62,9 +62,7 @@ const EventDetailPageLayout = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
   width: 100%;
-
   padding: 30px 0;
 `;
 

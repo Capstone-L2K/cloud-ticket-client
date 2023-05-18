@@ -12,7 +12,9 @@ import SizedBox from "../../components/SizedBox";
 import { QRModal } from "../../components/modals/QRModal";
 import EventListData from "../../db/EventData.json";
 import { useNavigate } from "react-router";
-function EventBox({ event, onQRClick }) {
+import RightIconSrc from "../../assets/icons/right-arrow.svg";
+
+function EventBox({ event, onClick, type }) {
   const { name, id, datetime_string, place, src } = event;
 
   const [QRModalVisible, setQRModalVisible] = useState(false);
@@ -28,8 +30,12 @@ function EventBox({ event, onQRClick }) {
           <BodyXSmall>{datetime_string}</BodyXSmall>{" "}
           <Caption>@ {place}</Caption>
         </Col>
-
-        <SvgIcon src={QRSrc} size={"40px"} onClick={onQRClick} />
+        {type === "join" ? (
+          <SvgIcon src={QRSrc} size={"40px"} onClick={onClick} />
+        ) : (
+          // type === host
+          <SvgIcon src={RightIconSrc} size={"40px"} onClick={onClick} />
+        )}
       </Row>
     </Box>
   );

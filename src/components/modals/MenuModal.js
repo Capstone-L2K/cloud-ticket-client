@@ -54,7 +54,7 @@ export const MenuModal = ({ isOpen, closeModal, setIsOpen }) => {
                 <Button
                   style={MintBtnStyle}
                   onClick={() => {
-                    naivate("/event/create");
+                    naivate("/create");
                     setIsOpen(false);
                   }}
                 >

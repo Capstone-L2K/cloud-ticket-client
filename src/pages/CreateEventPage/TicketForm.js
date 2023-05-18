@@ -91,9 +91,7 @@ export default function TicketForm({ setStep }) {
             <SvgIcon src={UnCheckIconSrc} onClick={() => setSetting1(true)} />
           )}
 
-          <CustomBodyRegular>
-            예매 직후에 참가자분들께 예매확인메시지 보내기
-          </CustomBodyRegular>
+          <CustomBodyRegular>예매 직후 예매확인메시지 보내기</CustomBodyRegular>
         </Row>
 
         <Row>
@@ -107,6 +105,7 @@ export default function TicketForm({ setStep }) {
           </CustomBodyRegular>
         </Row>
       </Form>
+      <SizedBox height="3rem" />
       <SquareBtn onClick={createEvent}>이벤트 생성하기</SquareBtn>
     </TicketFormLayout>
   );
@@ -145,7 +144,7 @@ const Row = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  gap: 20px;
+  gap: 5px;
   height: 40px;
   text-align: center;
 `;

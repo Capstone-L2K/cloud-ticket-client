@@ -2,32 +2,33 @@ import React, { useState } from "react";
 import { QRModal } from "../../components/modals/QRModal";
 import EventListData from "../../db/EventData.json";
 import { Title, BodyRegular } from "../../styles/fonts/Typography";
-import EventBox from "./EventBox";
+import EventBox from "../JoinEventPage/EventBox";
 import styled from "styled-components";
 import SizedBox from "../../components/SizedBox";
 import { id } from "date-fns/locale";
-export default function JoinEventPage() {
+import { useNavigate } from "react-router";
+
+export default function HostEventPage() {
   const [QRModalVisible, setQRModalVisible] = useState(false);
 
-  const [focusedEventId, setFocusedEventId] = useState(0);
-  const handleQRClick = (id) => {
+  let naivate = useNavigate();
+
+  const handleRightIconClick = (id) => {
     setQRModalVisible(true);
-    setFocusedEventId(id);
+    naivate(`/host/${id}`);
   };
   return (
-    <JoinEventPageLayout>
-      <Row>
-        <Title>김서연 </Title>
-        <BodyRegular> 님께서 참여하신 행사 목록입니다.</BodyRegular>
-      </Row>
+    <HostEventPageLayout>
+      <Title>김서연 </Title>
+      <BodyRegular> 님께서 주최하신 행사 목록입니다.</BodyRegular>
 
       <EventList>
         {EventListData.map((event) => (
           <EventBox
+            type="host"
             event={event}
             id={event.id}
-            type={"join"}
-            onClick={() => handleQRClick(event.id)}
+            onClick={() => handleRightIconClick(event.id)}
           />
         ))}
       </EventList>
@@ -37,10 +38,10 @@ export default function JoinEventPage() {
         isOpen={QRModalVisible}
         closeModal={() => setQRModalVisible(false)}
       />
-    </JoinEventPageLayout>
+    </HostEventPageLayout>
   );
 }
-const JoinEventPageLayout = styled.div`
+const HostEventPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

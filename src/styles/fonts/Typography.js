@@ -23,6 +23,7 @@ const Subtitle = styled.h2`
   line-height: 140%;
   /* or 54px */
   margin: 0;
+  white-space: nowrap;
   letter-spacing: -0.403754px;
 `;
 

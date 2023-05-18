@@ -26,7 +26,7 @@ function CreateCompleted() {
         <Button
           style={DefaultBtnStyle}
           width="100%"
-          onClick={() => naivate("/event/host")}
+          onClick={() => naivate("/host")}
         >
           운영중인 행사 목록으로 이동
         </Button>

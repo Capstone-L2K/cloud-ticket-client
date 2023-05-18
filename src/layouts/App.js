@@ -13,6 +13,8 @@ import {
   HostEventPage,
   JoinEventPage,
   ReserveTicketPage,
+  ManageMentPage,
+  ManagementRoute,
 } from "../pages";
 
 import PrivateRoute from "../utils/PrivateRoute";
@@ -42,9 +44,10 @@ export default function App() {
 
         {/* 인증을 반드시 해야지만 접속 가능한 페이지 정의 */}
         <Route element={<PrivateRoute authentication={true} />}>
-          <Route path="/event/create" element={<CreateEventPage />} />
-          <Route path="/event/join" element={<JoinEventPage />} />
-          <Route path="/event/host" element={<HostEventPage />} />
+          <Route path="/create" element={<CreateEventPage />} />
+          <Route path="/join" element={<JoinEventPage />} />
+          <Route path="/host" element={<HostEventPage />} />
+          <Route path="/host/:id/*" element={<ManagementRoute />} />
           <Route path="/event/:id/reserve" element={<ReserveTicketPage />} />
         </Route>
 
