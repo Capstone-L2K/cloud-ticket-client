@@ -9,7 +9,7 @@ import {
   BodyLarge,
   BodyXSmall,
 } from "../../../styles/fonts/Typography";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import EventList from "../../../db/EventData.json";
 import { SquareBtn } from "../../CreateEventPage/form/SquareBtn";
 import PeopleSrc from "../../../assets/icons/people.svg";
@@ -29,6 +29,11 @@ export default function EventDetailPage() {
     datetime_string,
     num_of_persons,
   } = EventList[id];
+
+  let naivate = useNavigate();
+  const handleClickReserveBtn = () => {
+    naivate(`/event/${id}/reserve`);
+  };
   return (
     <EventDetailPageLayout>
       <EventBannerImage src={require("../../../assets/demo/poster1.png")} />
@@ -48,7 +53,7 @@ export default function EventDetailPage() {
       </Row>
       <Section>{contents}</Section>
 
-      <SquareBtn>참여하기</SquareBtn>
+      <SquareBtn onClick={handleClickReserveBtn}>참여하기</SquareBtn>
     </EventDetailPageLayout>
   );
 }
@@ -57,9 +62,7 @@ const EventDetailPageLayout = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-
   width: 100%;
-
   padding: 30px 0;
 `;
 

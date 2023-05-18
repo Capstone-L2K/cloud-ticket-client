@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 
-import { TextButton } from "../../../styles/fonts/Typography";
 function Toggle() {
-  const [mode, setMode] = useState();
-  const clickedToggle = () => {
-    if (mode == 0) {
-      setMode(1);
-    } else {
-      setMode(0);
-    }
+  const [mode, setMode] = useState(0);
+  const clickedToggle = (e) => {
+    e.preventDefault();
+    setMode((prev) => !prev);
   };
 
   return (
@@ -40,7 +36,12 @@ const ToggleBtn = styled.button`
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease-in-out;
-  background-color: var(--main);
+  background-color: var(--gray200);
+  ${(props) =>
+    props.mode &&
+    css`
+      background-color: var(--main);
+    `}
 `;
 const Circle = styled.div`
   background-color: white;
@@ -53,7 +54,7 @@ const Circle = styled.div`
   ${(props) =>
     props.mode &&
     css`
-      transform: translate(50px, 0);
+      transform: translate(30px, 0);
       transition: all 0.5s ease-in-out;
     `}
 `;

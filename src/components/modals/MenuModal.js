@@ -4,7 +4,9 @@ import CancelIconSrc from "../../assets/icons/cancel.svg";
 import SvgIcon from "../SvgIcon";
 import Button from "../Button";
 import Logo from "../Logo";
-export const MenuModal = ({ isOpen, closeModal }) => {
+import { useNavigate } from "react-router";
+export const MenuModal = ({ isOpen, closeModal, setIsOpen }) => {
+  let naivate = useNavigate();
   const MintBtnStyle = {
     // 외곽선
     border: "none",
@@ -18,6 +20,12 @@ export const MenuModal = ({ isOpen, closeModal }) => {
     color: "var(--black)",
     bgColor: "var(--white)",
   };
+
+  const hanleClickLogo = () => {
+    naivate("/");
+    closeModal();
+  };
+  const isLogin = JSON.parse(sessionStorage.getItem("isAuthenticated"));
   return (
     <ModalContainer>
       {isOpen && (
@@ -25,7 +33,7 @@ export const MenuModal = ({ isOpen, closeModal }) => {
           <ModalView onClick={(e) => e.stopPropagation()}>
             <ModalContent>
               <Row>
-                <Logo color={`var(--white)`} />
+                <Logo color={`var(--white)`} onClick={hanleClickLogo} />
                 <SvgIcon
                   src={CancelIconSrc}
                   onClick={closeModal}
@@ -34,9 +42,45 @@ export const MenuModal = ({ isOpen, closeModal }) => {
               </Row>
 
               <Col>
-                <Button style={MintBtnStyle}>공연 둘러보기</Button>
-                <Button style={MintBtnStyle}>행사 주최하기</Button>
-                <Button style={WhiteBtnStyle}>로그인</Button>
+                <Button
+                  style={MintBtnStyle}
+                  onClick={() => {
+                    naivate("/event");
+                    setIsOpen(false);
+                  }}
+                >
+                  공연 둘러보기
+                </Button>
+                <Button
+                  style={MintBtnStyle}
+                  onClick={() => {
+                    naivate("/create");
+                    setIsOpen(false);
+                  }}
+                >
+                  행사 주최하기
+                </Button>
+                {isLogin ? (
+                  <Button
+                    style={WhiteBtnStyle}
+                    onClick={() => {
+                      naivate("/mypage");
+                      setIsOpen(false);
+                    }}
+                  >
+                    마이페이지
+                  </Button>
+                ) : (
+                  <Button
+                    style={WhiteBtnStyle}
+                    onClick={() => {
+                      naivate("/login");
+                      setIsOpen(false);
+                    }}
+                  >
+                    로그인
+                  </Button>
+                )}
               </Col>
             </ModalContent>
           </ModalView>
@@ -92,6 +136,15 @@ export const ModalOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  animation: modal-show 0.3s;
+  @keyframes modal-bg-show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 export const ModalBtn = styled.button`
@@ -144,14 +197,6 @@ export const ModalView = styled.div.attrs((props) => ({
     to {
       opacity: 1;
       margin-top: 0;
-    }
-  }
-  @keyframes modal-bg-show {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
     }
   }
 `;
