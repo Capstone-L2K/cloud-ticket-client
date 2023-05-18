@@ -7,6 +7,8 @@ import UpSrc from "../../../../assets/icons/up.svg";
 import DownSrc from "../../../../assets/icons/down.svg";
 import SvgIcon from "../../../../components/SvgIcon";
 import useInput from "../../../../hooks/useInput";
+import { useCallback } from "react";
+
 import { SquareBtn } from "../../../CreateEventPage/form/SquareBtn";
 import { Input } from "../../../CreateEventPage/form/Input";
 import { Subtitle, BodyRegular } from "../../../../styles/fonts/Typography";
@@ -22,20 +24,22 @@ export default function ReserveTicketPage() {
     num_of_persons,
   } = EventList[id];
 
-  const [numOfTickets, setNumOfTickets] = useState(0);
+  const [numOfTickets, setNumOfTickets] = useState(1);
   const [reservator, handleReservatorChange] = useInput("");
   const [phoneNumber, handlePhoneNumberChange] = useInput("");
   const [email, handleEmailChange] = useInput("");
 
   const addTicket = () => {
-    setNumOfTickets((prev) => prev + 1);
+    setNumOfTickets((prev) => {
+      console.log(prev);
+    });
   };
 
   const minusTicket = () => {
     setNumOfTickets((prev) => prev - 1);
   };
 
-  function onClickPayment() {
+  const onClickPayment = useCallback(() => {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
     IMP.init("imp81273170");
@@ -52,11 +56,12 @@ export default function ReserveTicketPage() {
       buyer_email: email, // 구매자 이메일
       buyer_addr: "신사동 661-16", // 구매자 주소
       buyer_postcode: "06018", // 구매자 우편번호
+      m_redirect_url: `${process.env.REACT_APP_WEB_SERVER_BASE_URL}/join`,
     };
 
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback);
-  }
+  }, []);
 
   /* 3. 콜백 함수 정의하기 */
   function callback(response) {
@@ -93,11 +98,11 @@ export default function ReserveTicketPage() {
         </Row>
 
         <Row>
-          <CustomBodyRegular>전화번호</CustomBodyRegular>
+          <CustomBodyRegular>연락처</CustomBodyRegular>
           <Input value={phoneNumber} onChange={handlePhoneNumberChange} />
         </Row>
         <Row>
-          <CustomBodyRegular>전화번호</CustomBodyRegular>
+          <CustomBodyRegular>이메일 </CustomBodyRegular>
           <Input value={email} onChange={handleEmailChange} />
         </Row>
       </Form>
