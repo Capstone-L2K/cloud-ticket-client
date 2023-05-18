@@ -7,7 +7,7 @@ export default function PrivateRoute({ authentication }) {
    * 로그인 했을 경우 : true 라는 텍스트 반환
    * 로그인 안했을 경우 : null or false(로그아웃 버튼 눌렀을경우 false로 설정) 반환
    */
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const isAuthenticated = JSON.parse(sessionStorage.getItem("isAuthenticated"));
 
   if (authentication) {
     // 인증이 반드시 필요한 페이지
@@ -26,7 +26,8 @@ export default function PrivateRoute({ authentication }) {
     if (isAuthenticated === null || isAuthenticated === "false") {
       return <Outlet />;
     } else {
-      return <Navigate to="/login" />;
+      alert("로그아웃 후 이용해주세요.");
+      return <Navigate to="/" />;
     }
   }
 }

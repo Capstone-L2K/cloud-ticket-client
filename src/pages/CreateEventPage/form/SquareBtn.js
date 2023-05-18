@@ -12,9 +12,18 @@ export const SquareBtn = styled.button`
   border: none;
   font-size: 18px;
 
-  position: sticky;
+  ${({ type }) =>
+    type === "relative"
+      ? `
+    position: relative;
+
+  `
+      : `
+    position: sticky;
   bottom: 30px;
   height: 44px;
+  
+  `};
 
   padding: 0 16px 3px;
   transition: all 80ms linear;

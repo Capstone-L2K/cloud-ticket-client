@@ -3,6 +3,7 @@ import { Title, Subtitle } from "../../styles/fonts/Typography";
 import FireWorkSrc from "../../assets/images/fireworks.png";
 import styled from "styled-components";
 import Button from "../../components/Button";
+import { useNavigate } from "react-router";
 function CreateCompleted() {
   const DefaultBtnStyle = {
     // 외곽선
@@ -10,7 +11,7 @@ function CreateCompleted() {
     color: "var(--dark-mint)",
     bgColor: "var(--white)",
   };
-
+  let naivate = useNavigate();
   return (
     <CreateCompletedPageLayout>
       <Box>
@@ -22,7 +23,11 @@ function CreateCompleted() {
           </CustomTitle>
           <img src={FireWorkSrc} width={"80px"} />
         </Row>
-        <Button style={DefaultBtnStyle} width="100%">
+        <Button
+          style={DefaultBtnStyle}
+          width="100%"
+          onClick={() => naivate("/event/host")}
+        >
           운영중인 행사 목록으로 이동
         </Button>
       </Box>
