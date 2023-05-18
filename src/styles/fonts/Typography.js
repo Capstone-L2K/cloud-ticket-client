@@ -79,6 +79,19 @@ const BodyXSmall = styled.h5`
 
   letter-spacing: -0.022em;
 `;
+
+const SmallBold = styled.h5`
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.7rem;
+  margin: 0;
+  color: ${({ color }) => (color ? color : `var(--gray400)`)};
+  line-height: 150%;
+  /* or 38px */
+
+  letter-spacing: -0.022em;
+`;
 const Caption = styled.h6`
   font-family: "Noto Sans KR";
   font-style: normal;
@@ -104,4 +117,5 @@ export {
   TextButton,
   Caption,
   BodyXSmall,
+  SmallBold,
 };
