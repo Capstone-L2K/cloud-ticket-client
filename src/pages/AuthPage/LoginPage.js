@@ -22,7 +22,7 @@ const LogInPage = () => {
         setLogInError(true);
       } else {
         const userInfo = { email, name: registerInfo?.name };
-        sessionStorage.setItem(userInfo, JSON.stringify(userInfo)); // 로그인 정보 저장
+        sessionStorage.setItem("userInfo", JSON.stringify(userInfo)); // 로그인 정보 저장
         sessionStorage.setItem("isAuthenticated", true);
         console.log(typeof sessionStorage.getItem("isAuthenticated"));
         alert("로그인이 완료되었습니다.");
