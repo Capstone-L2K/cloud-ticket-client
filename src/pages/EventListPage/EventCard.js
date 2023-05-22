@@ -14,23 +14,24 @@ import Poster3Src from "../../assets/demo/poster3.png";
 import Poster4Src from "../../assets/demo/poster4.png";
 import { useNavigate } from "react-router";
 export default function EventCard({ event }) {
-  const { id, img_src, name, datetime_string, place, num_of_persons } = event;
-
-  const posters = [Poster1Src, Poster2Src, Poster3Src, Poster4Src];
+  const { event_loc, banner, event_name, event_date, event_id } = event;
 
   let navigate = useNavigate();
   const moveToDetailPage = () => {
-    navigate(`/event/${id}`);
+    navigate(`/event/${event_id}`);
   };
   return (
     <Box onClick={moveToDetailPage}>
-      <img src={posters[img_src]} width={"100%"} height={"auto"} />
-      <BodySmall>{name}</BodySmall>
-      <BodyXSmall>{datetime_string}</BodyXSmall>
+      <Img src={banner} width={"100%"} height={"200px"} />
+
+      <BodySmall>{event_name}</BodySmall>
+      <BodyXSmall>{event_date}</BodyXSmall>
       <Row>
-        <Caption>@ {place}</Caption>
-        <SvgIcon src={PeopleSrc} size="12px" />
-        <BodyXSmall>{num_of_persons}</BodyXSmall>
+        <Caption>@ {event_loc}</Caption>
+        <Row2>
+          <SvgIcon src={PeopleSrc} size="12px" />
+          <BodyXSmall>0</BodyXSmall>
+        </Row2>
       </Row>
     </Box>
   );
@@ -42,7 +43,11 @@ const Box = styled.div`
 
   gap: 2px;
   width: 45%;
-  height: 200px;
+  height: 300px;
+`;
+
+const Img = styled.img`
+  object-fit: cover;
 `;
 
 const Row = styled.div`
@@ -51,4 +56,9 @@ const Row = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+`;
+const Row2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 `;

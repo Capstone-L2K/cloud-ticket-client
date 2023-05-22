@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import EventCard from "./EventCard";
 import EventLists from "../../db/EventData.json";
 import styled from "styled-components";
@@ -7,7 +7,22 @@ import { Title, BodyRegular } from "../../styles/fonts/Typography";
 import SizedBox from "../../components/SizedBox";
 import SearchIconSrc from "../../assets/icons/search.svg";
 import SvgIcon from "../../components/SvgIcon";
+import { useEffect } from "react";
+import EventService from "../../services/EventService";
+import axios from "axios";
 function EventListPage() {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    EventService.getEvents()
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setEvents(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <EventListPageLayout>
       <Search />
@@ -15,8 +30,8 @@ function EventListPage() {
       <BodyRegular>열린지 얼마안된 최신 행사들을 만나보세요!</BodyRegular>
       <SizedBox height="30px" />
       <EventList>
-        {EventLists.map((e) => (
-          <EventCard event={e} key={e.id} />
+        {events.map((e) => (
+          <EventCard event={e} key={e.event_id} />
         ))}
       </EventList>
     </EventListPageLayout>
@@ -50,7 +65,7 @@ const EventList = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  gap: 200px 30px;
+  gap: 50px 30px;
   margin: 2rem 0;
 `;
 const Row = styled.div`
