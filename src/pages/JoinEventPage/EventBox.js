@@ -15,7 +15,12 @@ import { useNavigate } from "react-router";
 import RightIconSrc from "../../assets/icons/right-arrow.svg";
 
 function EventBox({ event, onClick, type }) {
-  const { name, id, datetime_string, place, src } = event;
+  const {
+    event_name: name,
+    event_id: id,
+    event_date: datetime_string,
+    event_loc: place,
+  } = event;
 
   const [QRModalVisible, setQRModalVisible] = useState(false);
 

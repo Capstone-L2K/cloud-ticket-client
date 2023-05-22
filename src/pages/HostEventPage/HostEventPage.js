@@ -7,12 +7,25 @@ import styled from "styled-components";
 import SizedBox from "../../components/SizedBox";
 import { id } from "date-fns/locale";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import EventService from "../../services/EventService";
 
 export default function HostEventPage() {
   const [QRModalVisible, setQRModalVisible] = useState(false);
 
+  const [hostEvents, setHostEvents] = useState([]);
+
   let naivate = useNavigate();
 
+  useEffect(() => {
+    EventService.getHostEvents("KIMEWHA")
+      .then((res) => {
+        if (res.status === 200) {
+          setHostEvents(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
   const handleRightIconClick = (id) => {
     setQRModalVisible(true);
     naivate(`/host/${id}`);
@@ -23,12 +36,12 @@ export default function HostEventPage() {
       <BodyRegular> 님께서 주최하신 행사 목록입니다.</BodyRegular>
 
       <EventList>
-        {EventListData.map((event) => (
+        {hostEvents.map((event) => (
           <EventBox
             type="host"
             event={event}
-            id={event.id}
-            onClick={() => handleRightIconClick(event.id)}
+            key={event.event_id}
+            onClick={() => handleRightIconClick(event.event_id)}
           />
         ))}
       </EventList>
