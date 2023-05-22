@@ -6,14 +6,27 @@ import EventBox from "./EventBox";
 import styled from "styled-components";
 import SizedBox from "../../components/SizedBox";
 import { id } from "date-fns/locale";
+import EventService from "../../services/EventService";
+import { useEffect } from "react";
 export default function JoinEventPage() {
   const [QRModalVisible, setQRModalVisible] = useState(false);
 
+  const [joinEvents, setJoinEvents] = useState([]);
   const [focusedEventId, setFocusedEventId] = useState(0);
   const handleQRClick = (id) => {
     setQRModalVisible(true);
     setFocusedEventId(id);
   };
+
+  useEffect(() => {
+    EventService.getJoinEvents("LEE")
+      .then((res) => {
+        if (res.status === 200) {
+          setJoinEvents(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <JoinEventPageLayout>
       <Row>
@@ -22,7 +35,7 @@ export default function JoinEventPage() {
       </Row>
 
       <EventList>
-        {EventListData.map((event) => (
+        {joinEvents.map((event) => (
           <EventBox
             event={event}
             id={event.id}
