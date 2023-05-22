@@ -19,10 +19,10 @@ import TicketIconSrc from "../../assets/icons/ticket.svg";
 import Toggle from "./form/Toggle";
 import CheckIconSrc from "../../assets/icons/check.svg";
 import UnCheckIconSrc from "../../assets/icons/uncheck.svg";
-export default function TicketForm({ setStep }) {
+export default function TicketForm({ setStep, handleCreateEvent }) {
   const createEvent = () => {
     // 이벤트 생성 요청
-    setStep(3);
+    handleCreateEvent();
   };
   const back = () => {
     setStep(1);

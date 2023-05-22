@@ -27,7 +27,7 @@ export default function LandingPage() {
   ];
 
   const handleCreateBtnClick = () => {
-    navigate("/event/create");
+    navigate("/create");
   };
 
   const handleBrousingBtnClick = () => {

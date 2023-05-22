@@ -24,14 +24,17 @@ export default function EventForm({ setStep, eventInputs }) {
 
   const [name, handleNameChange] = useInput("");
   const [category, handleCategoryChange] = useInput("");
-  const [detail, handleEventDetailChange] = useInput("");
-  const [image, setImage] = useState("");
-
+  const [contents, handleEventContentChange] = useInput("");
+  const [images, setImages] = useState("");
+  const [date, setDate] = useState(new Date());
   const handleSubmitEventForm = () => {
+    console.log(date);
+
     eventInputs.current = {
       name: name,
       category: category,
-      detail: detail,
+      contents: contents,
+      date: date,
     };
     setStep(2);
   };
@@ -40,9 +43,6 @@ export default function EventForm({ setStep, eventInputs }) {
     setStep(0);
   };
 
-  const handleOpenFile = () => {
-    alert("이미지 파일 불러오기");
-  };
   return (
     <EventFormLayout>
       <SvgIcon src={BackIconSrc} onClick={back} size={"30px"} />
@@ -56,7 +56,7 @@ export default function EventForm({ setStep, eventInputs }) {
 
           <Input value={name} onChange={handleNameChange} />
 
-          <ImagePicker />
+          <ImagePicker images={images} setImage={setImages} />
         </Box>
         <Box>
           <BodyRegular>카테고리</BodyRegular>
@@ -66,12 +66,12 @@ export default function EventForm({ setStep, eventInputs }) {
         <Box>
           <BodyRegular>행사 설명</BodyRegular>
 
-          <TextArea value={detail} onChange={handleEventDetailChange} />
+          <TextArea value={contents} onChange={handleEventContentChange} />
         </Box>
 
         <Box>
           <BodyRegular>날짜 및 시간</BodyRegular>
-          <DateInput />
+          <DateInput date={date} setDate={setDate} />
         </Box>
 
         <Box>

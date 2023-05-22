@@ -21,6 +21,10 @@ export default function HostForm({ setStep, hostInputs }) {
   );
 
   const handleSubmitHostForm = () => {
+    if (email.trim() === "" || phoneNumber.trim() === "") {
+      alert("이메일 혹은 전화번호란이 비어있습니다.");
+      return;
+    }
     hostInputs.current = {
       email: email,
       phoneNumber: phoneNumber,

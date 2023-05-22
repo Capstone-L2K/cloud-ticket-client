@@ -46,7 +46,7 @@ export default function JoinEventPage() {
       </EventList>
       <QRModal
         id={id}
-        title={EventListData[0].name}
+        title={joinEvents[0].event_name}
         isOpen={QRModalVisible}
         closeModal={() => setQRModalVisible(false)}
       />
