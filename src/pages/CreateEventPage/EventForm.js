@@ -30,6 +30,7 @@ export default function EventForm({ setStep, eventInputs }) {
     eventInputs.current.contents
   );
   const [images, setImages] = useState("");
+  const [place, handleChangePlace] = useInput(eventInputs.current.place);
   const [date, setDate] = useState(eventInputs.current.date);
   const handleSubmitEventForm = () => {
     console.log(date);
@@ -39,6 +40,7 @@ export default function EventForm({ setStep, eventInputs }) {
       category: category,
       contents: contents,
       date: date,
+      place: place,
     };
     setStep(2);
   };
@@ -80,7 +82,7 @@ export default function EventForm({ setStep, eventInputs }) {
 
         <Box>
           <BodyRegular>장소</BodyRegular>
-          <Input />
+          <Input onChange={handleChangePlace} />
         </Box>
       </Form>
       <SquareBtn onClick={handleSubmitEventForm}>다음</SquareBtn>

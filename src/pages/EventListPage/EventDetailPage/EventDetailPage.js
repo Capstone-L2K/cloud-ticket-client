@@ -33,10 +33,10 @@ export default function EventDetailPage() {
   const {
     event_name: name,
     event_loc: place,
-    ticket_price: ticket_price,
+    ticket_max_price: ticket_price,
     event_content: contents,
     event_date: datetime_string,
-    num_of_persons,
+    event_joinnum: num_of_persons,
     banner,
   } = event;
 
