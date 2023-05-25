@@ -7,8 +7,7 @@ import styled from "styled-components";
 import ReloadIconSrc from "../../../assets/icons/reload.svg";
 import TrashIconSrc from "../../../assets/icons/trash.svg";
 
-export default function ImagePicker() {
-  const [images, setImages] = React.useState([]);
+export default function ImagePicker({ images, setImages }) {
   const maxNumber = 1;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
@@ -16,11 +15,10 @@ export default function ImagePicker() {
     setImages(imageList);
   };
 
-  const uploadImage = images.length >= 1 ? true : false;
+  const uploadImage = images?.length >= 1 ? true : false;
 
   return (
     <ImageUploading
-      multiple
       value={images}
       onChange={onChange}
       maxNumber={maxNumber}

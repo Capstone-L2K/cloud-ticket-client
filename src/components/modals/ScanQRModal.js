@@ -7,24 +7,15 @@ import Logo from "../Logo";
 import { useNavigate } from "react-router";
 import QRCode from "react-qr-code";
 import { Title, Subtitle } from "../../styles/fonts/Typography";
-
-export const QRModal = ({ id, isOpen, closeModal, title }) => {
+import QRScanner from "../../pages/HostEventPage/QRScanner";
+export const ScanQRModal = ({ isOpen, closeModal, setParticipants }) => {
   return (
     <ModalContainer>
       {isOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalView onClick={(e) => e.stopPropagation()}>
             <ModalContent>
-              <Row>
-                <Title onClick={closeModal}>X</Title>
-              </Row>
-              <Title>{title} </Title>
-              <QRCode
-                value={
-                  "$2b$12$alhHadg3432%FDADF/SFDRcNNRMP6UHjMQSFPppcE.4DMqREk6"
-                }
-                size="70vw"
-              />
+              <QRScanner setParticipants={setParticipants} />
             </ModalContent>
           </ModalView>
         </ModalOverlay>

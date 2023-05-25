@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-export default function DropDown({ options }) {
-  const [selected, setSelected] = useState("");
-
-  const handleSelect = (e) => {
-    setSelected(e.target.value);
-  };
+export default function DropDown({ options, selected, handleSelect }) {
   return (
     <Select onChange={handleSelect} value={selected}>
       {options.map((option) => (

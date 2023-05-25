@@ -6,34 +6,51 @@ import EventBox from "./EventBox";
 import styled from "styled-components";
 import SizedBox from "../../components/SizedBox";
 import { id } from "date-fns/locale";
+import EventService from "../../services/EventService";
+import { useEffect } from "react";
+
 export default function JoinEventPage() {
   const [QRModalVisible, setQRModalVisible] = useState(false);
 
-  const [focusedEventId, setFocusedEventId] = useState(0);
-  const handleQRClick = (id) => {
+  const [joinEvents, setJoinEvents] = useState([]);
+  const [focusedEventName, setFocusedEventName] = useState("");
+  const handleQRClick = (name) => {
     setQRModalVisible(true);
-    setFocusedEventId(id);
+    setFocusedEventName(name);
   };
+
+  useEffect(() => {
+    EventService.getJoinEvents("LEE")
+      .then((res) => {
+        if (res.status === 200) {
+          console.log(res.data);
+          setJoinEvents(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+
   return (
     <JoinEventPageLayout>
       <Row>
-        <Title>김서연 </Title>
+        <Title>{userInfo.name} </Title>
         <BodyRegular> 님께서 참여하신 행사 목록입니다.</BodyRegular>
       </Row>
 
       <EventList>
-        {EventListData.map((event) => (
+        {joinEvents.map((event) => (
           <EventBox
             event={event}
-            id={event.id}
+            id={event.event_id}
             type={"join"}
-            onClick={() => handleQRClick(event.id)}
+            onClick={() => handleQRClick(event.event_name)}
           />
         ))}
       </EventList>
       <QRModal
-        id={id}
-        title={EventListData[0].name}
+        title={focusedEventName}
         isOpen={QRModalVisible}
         closeModal={() => setQRModalVisible(false)}
       />

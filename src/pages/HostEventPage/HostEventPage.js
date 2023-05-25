@@ -5,39 +5,59 @@ import { Title, BodyRegular } from "../../styles/fonts/Typography";
 import EventBox from "../JoinEventPage/EventBox";
 import styled from "styled-components";
 import SizedBox from "../../components/SizedBox";
-import { id } from "date-fns/locale";
+import { getUser } from "../../utils/User";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import EventService from "../../services/EventService";
 
 export default function HostEventPage() {
   const [QRModalVisible, setQRModalVisible] = useState(false);
 
+  const [hostEvents, setHostEvents] = useState([
+    {
+      event_id: 54,
+      event_name: "N.Flying 소극장 콘서트 - 우만합 : 우리 만나",
+      banner:
+        "https://cloudticket-event.s3.ap-northeast-2.amazonaws.com/banner/default.jpg",
+      event_date: "2023-05-06",
+      event_loc: "KT&G 상상마당 홍대 라이브홀",
+    },
+  ]);
+
+  const userInfo = getUser();
   let naivate = useNavigate();
 
-  const handleRightIconClick = (id) => {
-    setQRModalVisible(true);
-    naivate(`/host/${id}`);
+  useEffect(() => {
+    /*
+    EventService.getHostEvents("KIMEWHA")
+      .then((res) => {
+        if (res.status === 200) {
+          setHostEvents(res.data);
+          console.log(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+      */
+  }, []);
+  const handleRightIconClick = (event) => {
+    naivate(`/host/${event.event_id}`, { state: event });
   };
+
   return (
     <HostEventPageLayout>
-      <Title>김서연 </Title>
+      <Title>{userInfo.name} </Title>
       <BodyRegular> 님께서 주최하신 행사 목록입니다.</BodyRegular>
 
       <EventList>
-        {EventListData.map((event) => (
+        {hostEvents.map((event) => (
           <EventBox
             type="host"
             event={event}
-            id={event.id}
-            onClick={() => handleRightIconClick(event.id)}
+            key={event.event_id}
+            onClick={() => handleRightIconClick(event)}
           />
         ))}
       </EventList>
-      <QRModal
-        id={id}
-        title={EventListData[0].name}
-        isOpen={QRModalVisible}
-        closeModal={() => setQRModalVisible(false)}
-      />
     </HostEventPageLayout>
   );
 }

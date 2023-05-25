@@ -17,13 +17,14 @@ import SvgIcon from "../../components/SvgIcon";
 import BackIconSrc from "../../assets/icons/back.svg";
 import TicketIconSrc from "../../assets/icons/ticket.svg";
 import Toggle from "./form/Toggle";
+
 import CheckIconSrc from "../../assets/icons/check.svg";
 import UnCheckIconSrc from "../../assets/icons/uncheck.svg";
-export default function TicketForm({ setStep }) {
-  const createEvent = () => {
-    // 이벤트 생성 요청
-    setStep(3);
-  };
+export default function TicketForm({
+  setStep,
+  handleCreateEvent,
+  ticketInputs,
+}) {
   const back = () => {
     setStep(1);
   };
@@ -40,6 +41,13 @@ export default function TicketForm({ setStep }) {
   const [setting1, setSetting1] = useState(false);
   const [setting2, setSetting2] = useState(false);
 
+  const [ticketName, handleChangeTicketName] = useInput("");
+  const [ticketLimitPerPerson, handleChangeTicketLimitPerPerson] = useInput(1);
+  const [numOfEntireTickets, handleChangeNumOfEntireTickets] = useInput(10);
+
+  const handleOnClickTicketIcon = () => {
+    setStep(3);
+  };
   return (
     <TicketFormLayout>
       <SvgIcon src={BackIconSrc} onClick={back} size={"30px"} />
@@ -51,19 +59,27 @@ export default function TicketForm({ setStep }) {
         <Box>
           <BodyRegular>티켓이름</BodyRegular>
           <Row>
-            <Input />
-            <SvgIcon src={TicketIconSrc} />
+            <Input onChange={handleChangeTicketName} value={ticketName} />
+            <SvgIcon src={TicketIconSrc} onClick={handleOnClickTicketIcon} />
           </Row>
         </Box>
 
         <Row>
           <BodyRegular>1인당 매 수 제한</BodyRegular>
-          <DropDown options={makeOption(1, 5)} />
+          <DropDown
+            options={makeOption(1, 5)}
+            handleSelect={handleChangeTicketLimitPerPerson}
+            selected={ticketLimitPerPerson}
+          />
         </Row>
 
         <Row>
           <BodyRegular>전체 티켓 매수</BodyRegular>
-          <DropDown options={makeOption(1, 30)} />
+          <DropDown
+            options={makeOption(1, 30)}
+            handleSelect={handleChangeNumOfEntireTickets}
+            selected={numOfEntireTickets}
+          />
         </Row>
 
         <Row>
@@ -105,8 +121,7 @@ export default function TicketForm({ setStep }) {
           </CustomBodyRegular>
         </Row>
       </Form>
-      <SizedBox height="3rem" />
-      <SquareBtn onClick={createEvent}>이벤트 생성하기</SquareBtn>
+      <SquareBtn onClick={handleCreateEvent}>이벤트 생성하기</SquareBtn>
     </TicketFormLayout>
   );
 }
@@ -121,6 +136,7 @@ const TicketFormLayout = styled.div`
   align-items: flex-start;
   height: 100%;
   width: 100%;
+  padding-bottom: 1rem;
 `;
 const Box = styled.div`
   display: flex;
@@ -135,8 +151,6 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  height: 100%;
-  gap: 10px;
 `;
 const Row = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 // 100;300;400;500;700;900
 const Title = styled.header`
   font-family: "Noto Sans KR";
-  font-weight: 900;
+  font-weight: ${({ fw }) => (fw ? fw : 900)};
   font-size: var(--font-size-xl);
 
   line-height: 120%;
@@ -17,7 +17,7 @@ const Title = styled.header`
 const Subtitle = styled.h2`
   font-family: "Noto Sans KR";
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${({ fw }) => (fw ? fw : 700)};
   font-size: var(--font-size-ml);
   color: ${({ color }) => (color ? color : `var(--gray500)`)};
   line-height: 140%;
@@ -30,9 +30,9 @@ const Subtitle = styled.h2`
 const BodyLarge = styled.h3`
   font-family: "Noto Sans KR";
   font-style: normal;
-  font-weight: 500;
+  font-weight: ${({ fw }) => (fw ? fw : 500)};
 
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xl);
 
   color: ${({ color }) => (color ? color : `var(--gray500)`)};
   line-height: 150%;
@@ -44,7 +44,7 @@ const BodyLarge = styled.h3`
 const BodyRegular = styled.h4`
   font-family: "Noto Sans KR";
   font-style: normal;
-  font-weight: 400;
+  font-weight: ${({ fw }) => (fw ? fw : 400)};
   font-size: var(--font-size-ms);
   margin: 0;
 
@@ -58,7 +58,7 @@ const BodyRegular = styled.h4`
 const BodySmall = styled.h5`
   font-family: "Noto Sans KR";
   font-style: normal;
-  font-weight: 300;
+  font-weight: ${({ fw }) => (fw ? fw : 300)};
   font-size: var(--font-size-sm);
   margin: 0;
   color: ${({ color }) => (color ? color : `var(--gray400)`)};
@@ -108,6 +108,18 @@ const TextButton = styled.h6`
   font-size: var(--font-size-ms);
   margin: 0;
 `;
+const CustomFont = styled.h6`
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: ${({ fw }) => (fw ? fw : 300)};
+  font-size: ${({ fs }) => (fs ? fs : "12px")};
+  margin: 0;
+  color: ${({ color }) => (color ? color : `var(--gray400)`)};
+  line-height: 150%;
+  /* or 38px */
+
+  letter-spacing: -0.022em;
+`;
 
 export {
   Title,
@@ -119,4 +131,5 @@ export {
   Caption,
   BodyXSmall,
   SmallBold,
+  CustomFont,
 };

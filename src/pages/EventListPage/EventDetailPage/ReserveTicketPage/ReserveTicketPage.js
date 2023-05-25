@@ -8,38 +8,31 @@ import DownSrc from "../../../../assets/icons/down.svg";
 import SvgIcon from "../../../../components/SvgIcon";
 import useInput from "../../../../hooks/useInput";
 import { useCallback } from "react";
-
+import { useLocation } from "react-router";
 import { SquareBtn } from "../../../CreateEventPage/form/SquareBtn";
 import { Input } from "../../../CreateEventPage/form/Input";
 import { Subtitle, BodyRegular } from "../../../../styles/fonts/Typography";
 export default function ReserveTicketPage() {
   const { id } = useParams();
 
-  const {
-    name,
-    place,
-    ticket_price,
-    contents,
-    datetime_string,
-    num_of_persons,
-  } = EventList[id];
+  const location = useLocation();
+  const { state: event } = location;
 
+  const { name, ticket_price, banner } = event;
   const [numOfTickets, setNumOfTickets] = useState(1);
   const [reservator, handleReservatorChange] = useInput("");
   const [phoneNumber, handlePhoneNumberChange] = useInput("");
   const [email, handleEmailChange] = useInput("");
 
   const addTicket = () => {
-    setNumOfTickets((prev) => {
-      console.log(prev);
-    });
+    setNumOfTickets((prev) => prev + 1);
   };
 
   const minusTicket = () => {
     setNumOfTickets((prev) => prev - 1);
   };
 
-  const onClickPayment = useCallback(() => {
+  const onClickPayment = () => {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
     IMP.init("imp81273170");
@@ -49,19 +42,19 @@ export default function ReserveTicketPage() {
       pg: "INIpayTest", // PG사
       pay_method: "card", // 결제수단
       merchant_uid: `mid_${new Date().getTime()}`, // 주문번호
-      amount: 1000, // 결제금액
+      amount: ticket_price * numOfTickets, // 결제금액
       name: `[클라우드 티켓] ${name} 티켓 구매 `, // 주문명
       buyer_name: reservator, // 구매자 이름
       buyer_tel: phoneNumber, // 구매자 전화번호
       buyer_email: email, // 구매자 이메일
       buyer_addr: "신사동 661-16", // 구매자 주소
       buyer_postcode: "06018", // 구매자 우편번호
-      m_redirect_url: `${process.env.REACT_APP_WEB_SERVER_BASE_URL}/join`,
+      m_redirect_url: `localhost:3000/join`, // 구매 후 이동할 url
     };
 
     /* 4. 결제 창 호출하기 */
     IMP.request_pay(data, callback);
-  }, []);
+  };
 
   /* 3. 콜백 함수 정의하기 */
   function callback(response) {
@@ -84,8 +77,8 @@ export default function ReserveTicketPage() {
         <Subtitle> = {ticket_price * numOfTickets}원</Subtitle>
 
         <Col>
-          <SvgIcon src={UpSrc} onClick={() => addTicket} />
-          <SvgIcon src={DownSrc} onClick={() => minusTicket} />
+          <SvgIcon src={UpSrc} onClick={addTicket} />
+          <SvgIcon src={DownSrc} onClick={minusTicket} />
         </Col>
       </TicketBox>
 
@@ -106,6 +99,7 @@ export default function ReserveTicketPage() {
           <Input value={email} onChange={handleEmailChange} />
         </Row>
       </Form>
+      <SizedBox height="100%" />
       <SquareBtn onClick={onClickPayment}>결제하기</SquareBtn>
     </ReserveTicketPageLayout>
   );
@@ -117,7 +111,8 @@ const ReserveTicketPageLayout = styled.div`
   align-items: center;
   height: 100%;
   width: 100vw;
-  padding: 2rem 0;
+  padding-top: 2rem;
+  position: relative;
 `;
 
 const CustomBodyRegular = styled(BodyRegular)`

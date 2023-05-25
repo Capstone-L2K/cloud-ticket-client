@@ -10,22 +10,82 @@ import EventForm from "./EventForm";
 import TicketForm from "./TicketForm";
 import { useNavigate } from "react-router";
 import CreateCompleted from "./CreateCompleted";
-
+import EventService from "../../services/EventService";
+import CustomTicket from "./CustomTicket";
 export default function CreateEventPage() {
   const [step, setStep] = useState(0);
-  let navigate = useNavigate();
+
   const hostInputs = useRef({
     email: "",
     phone_number: "",
   });
-  console.log(hostInputs);
-  const eventInputs = useRef(undefined);
-  const ticketInputs = useState(undefined);
+
+  const eventInputs = useRef({
+    name: "",
+    category: " ",
+    contents: "",
+    date: new Date(),
+    place: "",
+  });
+
+  const ticketInputs = useRef({
+    ticket_name: "",
+    price: 0,
+    ticket_limit_per_person: 1,
+    num_of_total_tickets: 10,
+  });
+
+  function convertDateFormat(date) {
+    let dateFormat =
+      date.getFullYear() +
+      "-" +
+      (date.getMonth() + 1 < 9
+        ? "0" + (date.getMonth() + 1)
+        : date.getMonth() + 1) +
+      "-" +
+      (date.getDate() < 9 ? "0" + date.getDate() : date.getDate());
+    return dateFormat;
+  }
+  const handleCreateEvent = () => {
+    // yyyy-mm-dd 로 변환
+    var date_formattened = convertDateFormat(
+      new Date(eventInputs.current.date)
+    );
+
+    const time = new Date(eventInputs.current.date).toTimeString().slice(0, 8);
+
+    var body = {
+      event_name: eventInputs.current.name,
+      category_id: "1",
+      event_content: eventInputs.current.contents,
+      event_date: date_formattened + " " + time,
+      event_loc: eventInputs.current.place,
+    };
+
+    console.log(body);
+    EventService.createEvent(body).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        if (res.data.statusCode === 200) {
+          setStep(4);
+        } else {
+          const parsed = JSON.parse(res.data.body);
+          console.log(parsed);
+          alert(parsed.message);
+        }
+      }
+    });
+  };
 
   const contents = [
     <HostForm setStep={setStep} hostInputs={hostInputs} />,
     <EventForm setStep={setStep} eventInputs={eventInputs} />,
-    <TicketForm setStep={setStep} ticketInputs={ticketInputs} />,
+    <TicketForm
+      setStep={setStep}
+      ticketInputs={ticketInputs}
+      handleCreateEvent={handleCreateEvent}
+    />,
+    <CustomTicket setStep={setStep} />,
     <CreateCompleted />,
   ];
 

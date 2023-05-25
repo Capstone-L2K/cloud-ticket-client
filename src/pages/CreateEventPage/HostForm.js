@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BodySmall,
   BodyRegular,
@@ -14,13 +14,17 @@ import { SquareBtn } from "./form/SquareBtn";
 import { Input } from "./form/Input";
 export default function HostForm({ setStep, hostInputs }) {
   let navigate = useNavigate();
-
+  const [error, setError] = useState("");
   const [email, handleEmailChange] = useInput(hostInputs.current.email);
   const [phoneNumber, handlePhoneNumberChange] = useInput(
     hostInputs.current.phoneNumber
   );
 
   const handleSubmitHostForm = () => {
+    if (email.trim() === "" || phoneNumber.trim() === "") {
+      setError("이메일 혹은 전화번호란이 비어있습니다.");
+      return;
+    }
     hostInputs.current = {
       email: email,
       phoneNumber: phoneNumber,
@@ -33,24 +37,39 @@ export default function HostForm({ setStep, hostInputs }) {
       <Subtitle> 1/3 단계 </Subtitle>
       <Title>주최자 기본 정보</Title>
       <SizedBox height={"50px"} />
-      <Form>
+      <Form onSubmit={handleSubmitHostForm}>
         <Box>
           <BodyRegular>주최자 이메일</BodyRegular>
-          <Input value={email} onChange={handleEmailChange} />
+          <Input
+            value={email}
+            onChange={handleEmailChange}
+            type="email"
+            id="email"
+            name="email"
+          />
         </Box>
         <SizedBox height="20px" />
         <Box>
           <BodyRegular>주최자 전화번호</BodyRegular>
-          <Input value={phoneNumber} onChange={handlePhoneNumberChange} />
+          <Input
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+            type="tel"
+            id="tel"
+            name="tel"
+            pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+            placeholder="010-XXXX-XXXX"
+          />
         </Box>
+        {error && <Error>{error}</Error>}
+        <SizedBox height={"60%"} />
+        <SquareBtn type="submit">다음</SquareBtn>
       </Form>
-      <SquareBtn onClick={handleSubmitHostForm}>다음</SquareBtn>
     </HostFormLayout>
   );
 }
 
 export const Form = styled.form`
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -71,4 +90,9 @@ const Box = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   gap: 1rem;
+`;
+export const Error = styled.div`
+  color: #e01e5a;
+  margin: 8px 0 16px;
+  font-weight: bold;
 `;

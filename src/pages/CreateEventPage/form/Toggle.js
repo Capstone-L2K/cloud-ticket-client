@@ -24,7 +24,6 @@ const Wrapper = styled.div`
 `;
 
 const ToggleBtn = styled.button`
-  z-index: 5;
   width: 70px;
   height: 35px;
   border-radius: 30px;
