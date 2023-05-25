@@ -13,7 +13,7 @@ import { QRModal } from "../../components/modals/QRModal";
 import EventListData from "../../db/EventData.json";
 import { useNavigate } from "react-router";
 import RightIconSrc from "../../assets/icons/right-arrow.svg";
-
+import Tag from "../../components/Tag";
 function EventBox({ event, onClick, type }) {
   const {
     event_name: name,
@@ -28,6 +28,7 @@ function EventBox({ event, onClick, type }) {
 
   return (
     <Box onClick={() => naivate(`/event/${id}`)}>
+      <Tag state={1}>진행 중 </Tag>
       <Subtitle>{name}</Subtitle>
 
       <Row onClick={(e) => e.stopPropagation()}>

@@ -11,6 +11,7 @@ export const SquareBtn = styled.button`
   background-color: var(--main);
   border: none;
   font-size: 18px;
+  height: 44px;
 
   ${({ type }) =>
     type === "relative"
@@ -20,8 +21,8 @@ export const SquareBtn = styled.button`
   `
       : `
     position: sticky;
-  bottom: 30px;
-  height: 44px;
+  bottom: 10px;
+
   
   `};
 

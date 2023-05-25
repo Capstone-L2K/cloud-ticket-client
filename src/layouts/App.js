@@ -16,6 +16,7 @@ import {
   ManageMentPage,
   ManagementRoute,
   MyPage,
+  CustomTicketPage,
 } from "../pages";
 
 import PrivateRoute from "../utils/PrivateRoute";
@@ -47,6 +48,7 @@ export default function App() {
         <Route element={<PrivateRoute authentication={true} />}>
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/create" element={<CreateEventPage />} />
+
           <Route path="/join" element={<JoinEventPage />} />
           <Route path="/host" element={<HostEventPage />} />
           <Route path="/host/:id/*" element={<ManagementRoute />} />

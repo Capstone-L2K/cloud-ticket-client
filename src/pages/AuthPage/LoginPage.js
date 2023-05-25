@@ -2,7 +2,8 @@ import useInput from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import React, { useCallback, useState } from "react";
-
+import { Title } from "../../styles/fonts/Typography";
+import SizedBox from "../../components/SizedBox";
 const LogInPage = () => {
   var navigate = useNavigate();
   //const { data: userData, error, mutate } = useSWR('/api/users', fetcher);
@@ -34,6 +35,8 @@ const LogInPage = () => {
 
   return (
     <LoginPageLayout>
+      <Title>로그인</Title>
+      <SizedBox height="20px" />
       <Form onSubmit={onSubmit}>
         <Label id="email-label">
           <span>이메일 주소</span>
@@ -77,7 +80,7 @@ const LoginPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 
   width: 100%;
   height: 100%;

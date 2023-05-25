@@ -7,8 +7,24 @@ import checkIconSrc from "../../assets/icons/check-mono.svg";
 import SvgIcon from "../../components/SvgIcon";
 import { useNavigate } from "react-router";
 
+import SampleTicket1Src from "../../assets/images/ticket-sample1.png";
+import SampleTicket2Src from "../../assets/images/ticket-sample2.png";
+import SampleTicket3Src from "../../assets/images/ticket-sample3.png";
+import SampleTicket4Src from "../../assets/images/ticket-sample4.png";
+import SampleTicket5Src from "../../assets/images/ticket-sample5.png";
+import SampleTicket6Src from "../../assets/images/ticket-sample6.png";
+
 export default function LandingPage() {
   let navigate = useNavigate();
+
+  const tickets = [
+    SampleTicket1Src,
+    SampleTicket2Src,
+    SampleTicket3Src,
+    SampleTicket4Src,
+    SampleTicket5Src,
+  ];
+
   const sections = [
     {
       title: "01. 다양한 접수 대행",
@@ -49,17 +65,23 @@ export default function LandingPage() {
   };
   return (
     <LandingPageLayout>
-      <SizedBox height={"5rem"} />
       <Box>
         <Title>
-          오프라인 행사 입장 관리는 <br /> 이제 클라우드 티켓에서
+          오프라인 행사 <br /> 입장 관리는 <br /> 이제 클라우드 티켓에서
         </Title>
         <SizedBox height={"2rem"} />
         <BodyRegular>
           티켓 등록부터 검수까지 <br />
           모두 클라우드 티켓과 함께!
         </BodyRegular>
-        <SizedBox height={"5rem"} />
+        <SizedBox height={"3rem"} />
+        <SampleTicketBox>
+          {tickets.map((ticket) => (
+            <Img src={ticket} />
+          ))}
+        </SampleTicketBox>
+
+        <SizedBox height={"2rem"} />
         <Row>
           <Button style={DefaultBtnStyle} onClick={handleCreateBtnClick}>
             행사 생성하기
@@ -102,7 +124,7 @@ const LandingPageLayout = styled.div`
   flex-direction: column;
 
   align-items: center;
-
+  padding-top: 20px;
   height: 100%;
 
   /* PC (해상도 1024px)*/
@@ -124,6 +146,59 @@ const Box = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+`;
+
+const SampleTicketBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
+  animation: 33s linear 0s infinite normal forwards running rollingleft1;
+
+  @keyframes rollingleft1 {
+    /* 원본용 */
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-100%);
+    }
+    50.01% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+`;
+const SampleTicketBox2 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 40px;
+  align-items: center;
+  width: 100%;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
+
+  animation: 33s linear 0s infinite normal none running rollingleft2;
+  @keyframes rollingleft2 {
+    /* 클론용 */
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-200%);
+    }
+  }
+`;
+const Img = styled.img`
+  width: 80px;
+  height: 150px;
 `;
 
 const Row = styled.div`

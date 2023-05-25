@@ -49,7 +49,7 @@ export const MenuModal = ({ isOpen, closeModal, setIsOpen }) => {
                     setIsOpen(false);
                   }}
                 >
-                  공연 둘러보기
+                  행사 둘러보기
                 </Button>
                 <Button
                   style={MintBtnStyle}

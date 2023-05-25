@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   Title,
@@ -16,27 +16,51 @@ import PeopleSrc from "../../../assets/icons/people.svg";
 import TicketIconSrc from "../../../assets/icons/ticket.svg";
 import SvgIcon from "../../../components/SvgIcon";
 import SizedBox from "../../../components/SizedBox";
+import EventService from "../../../services/EventService";
 export default function EventDetailPage() {
   // 이벤트 id 로 이벤트 정보 fetching
 
   const { id } = useParams();
 
+  const [event, setEvent] = useState({
+    name: "",
+    place: "",
+    ticket_price: 3000,
+    contents: "",
+    datetime_string: "",
+    num_of_persons: 0,
+  });
   const {
-    name,
-    place,
-    ticket_price,
-    contents,
-    datetime_string,
+    event_name: name,
+    event_loc: place,
+    ticket_price: ticket_price,
+    event_content: contents,
+    event_date: datetime_string,
     num_of_persons,
-  } = EventList[id];
+    banner,
+  } = event;
 
   let naivate = useNavigate();
   const handleClickReserveBtn = () => {
-    naivate(`/event/${id}/reserve`);
+    naivate(`/event/${id}/reserve`, {
+      state: { name, ticket_price: 1000, banner },
+    });
   };
+
+  useEffect(() => {
+    EventService.getEventDetail(id)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          setEvent(res.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <EventDetailPageLayout>
-      <EventBannerImage src={require("../../../assets/demo/poster1.png")} />
+      <EventBannerImage src={banner} />
       <Title>{name}</Title>
       <SizedBox height="20px" />
       <BodyRegular>{datetime_string}</BodyRegular>
@@ -63,6 +87,7 @@ const EventDetailPageLayout = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+  height: 100%;
   padding: 30px 0;
 `;
 
@@ -82,6 +107,8 @@ const Row = styled.div`
 const Section = styled.main`
   border-top: 0.5px solid var(--gray300);
   border-bottom: 0.5px solid var(--gray300);
+
+  width: 100%;
 
   padding: 20px 0;
   margin: 20px 0;

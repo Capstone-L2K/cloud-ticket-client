@@ -10,7 +10,10 @@ const EventService = {
     HTTP.get(
       "https://otzj6gj66g.execute-api.ap-northeast-2.amazonaws.com/v1/events"
     ),
-
+  getEventDetail: (event_id) =>
+    HTTP.get(
+      `https://ktl9paw7sk.execute-api.ap-northeast-2.amazonaws.com/v1/events?eventid=${event_id}`
+    ),
   getHostEvents: (host_id) =>
     axios.get(
       `https://otzj6gj66g.execute-api.ap-northeast-2.amazonaws.com/v1/events?hostid=${host_id}`

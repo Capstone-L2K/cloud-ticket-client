@@ -10,9 +10,11 @@ import SvgIcon from "../../components/SvgIcon";
 import { useEffect } from "react";
 import EventService from "../../services/EventService";
 import axios from "axios";
+import useInput from "../../hooks/useInput";
 function EventListPage() {
   const [events, setEvents] = useState([]);
 
+  const [searchInput, handleChangeSearchInput] = useInput("");
   useEffect(() => {
     EventService.getEvents()
       .then((res) => {
@@ -25,14 +27,16 @@ function EventListPage() {
   }, []);
   return (
     <EventListPageLayout>
-      <Search />
+      <Search onChange={handleChangeSearchInput} />
       <Title>따끈따끈한 신규행사</Title>
       <BodyRegular>열린지 얼마안된 최신 행사들을 만나보세요!</BodyRegular>
       <SizedBox height="30px" />
       <EventList>
-        {events.map((e) => (
-          <EventCard event={e} key={e.event_id} />
-        ))}
+        {events
+          .filter(({ event_name }) => event_name.includes(searchInput))
+          .map((e) => (
+            <EventCard event={e} key={e.event_id} />
+          ))}
       </EventList>
     </EventListPageLayout>
   );
@@ -40,11 +44,11 @@ function EventListPage() {
 
 export default EventListPage;
 
-function Search() {
+function Search({ onChange }) {
   return (
     <Row>
       <SvgIcon src={SearchIconSrc} />
-      <Input />
+      <Input onChange={onChange} />
     </Row>
   );
 }

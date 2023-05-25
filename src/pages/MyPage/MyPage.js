@@ -8,18 +8,31 @@ import SizedBox from "../../components/SizedBox";
 import TicketIconSrc from "../../assets/icons/ticket.svg";
 import RightIconSrc from "../../assets/icons/right-arrow.svg";
 import styled from "styled-components";
+import { getUser } from "../../utils/User";
+
 import { DefaultBtnStyle, FilledBtnStyle } from "../../styles/style";
 import { useNavigate } from "react-router";
 function MyPage() {
   let naivate = useNavigate();
 
-  const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+  const userInfo = getUser();
+
+  const handleClickLogout = () => {
+    let result = window.confirm("로그아웃 하시겠습니까?");
+
+    if (result) {
+      sessionStorage.removeItem("userInfo");
+      sessionStorage.removeItem("isAuthenticated");
+      naivate("/");
+    }
+  };
+
   return (
     <MyPageLayout>
       <Col>
         <BodyRegular>환영합니다!</BodyRegular>
         <Row>
-          <Title>{userInfo.name}</Title>
+          <Title>{userInfo?.name}</Title>
           <BodyRegular>님의 마이페이지입니다.</BodyRegular>
         </Row>
       </Col>
@@ -50,7 +63,7 @@ function MyPage() {
         </Row>
 
         <Row>
-          <BodySmall>로그아웃 </BodySmall>
+          <BodySmall onClick={handleClickLogout}>로그아웃 </BodySmall>
           <BodySmall>|</BodySmall>
           <BodySmall>회원탈퇴 </BodySmall>
         </Row>

@@ -9,7 +9,6 @@ const SvgIcon = ({ src, size, onClick }) => {
         src={src}
         width={size ? size : "24px"}
         height={size ? size : "24px"}
-        onClick={onClick}
       />
     </IconContainer>
   );

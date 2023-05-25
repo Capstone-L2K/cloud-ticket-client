@@ -15,11 +15,10 @@ export default function ImagePicker({ images, setImages }) {
     setImages(imageList);
   };
 
-  const uploadImage = images.length >= 1 ? true : false;
+  const uploadImage = images?.length >= 1 ? true : false;
 
   return (
     <ImageUploading
-      multiple
       value={images}
       onChange={onChange}
       maxNumber={maxNumber}

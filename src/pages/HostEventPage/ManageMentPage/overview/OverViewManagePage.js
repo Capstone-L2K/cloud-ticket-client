@@ -1,58 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BodySmall,
   BodyRegular,
   Subtitle,
   Title,
-} from "../../styles/fonts/Typography";
-import SizedBox from "../../components/SizedBox";
+} from "../../../../styles/fonts/Typography";
+import SizedBox from "../../../../components/SizedBox";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import useInput from "../../hooks/useInput";
-import SvgIcon from "../../components/SvgIcon";
-import ImageIconSrc from "../../assets/icons/image.svg";
-import { SCREEN_PADDING } from "../../styles/style";
-import { SquareBtn } from "./form/SquareBtn";
-import ImagePicker from "./form/ImagePicker";
-import BackIconSrc from "../../assets/icons/back.svg";
-import DateInput from "./form/DateInput";
-import { Input } from "./form/Input";
-import TimePicker from "./form/TimeInput";
+import useInput from "../../../../hooks/useInput";
+import SvgIcon from "../../../../components/SvgIcon";
+import ImageIconSrc from "../../../../assets/icons/image.svg";
+import { SCREEN_PADDING } from "../../../../styles/style";
+import { SquareBtn } from "../../../CreateEventPage/form/SquareBtn";
+import { useParams } from "react-router";
+import BackIconSrc from "../../../../assets/icons/back.svg";
+import DateInput from "../../../CreateEventPage/form/DateInput";
+import { Input } from "../../../CreateEventPage/form/Input";
+import ImagePicker from "../../../CreateEventPage/form/ImagePicker";
+import EventService from "../../../../services/EventService";
+export default function OverViewManagePage({ setStep, eventInputs }) {
+  const [name, handleNameChange, setName] = useInput("");
+  const [category, handleCategoryChange, setCategory] = useInput("");
+  const [contents, handleEventContentChange, setContents] = useInput("");
+  const [images, setImages] = useState();
+  const [date, setDate] = useState("");
 
-export default function EventForm({ setStep, eventInputs }) {
-  let navigate = useNavigate();
-
-  const [name, handleNameChange] = useInput(eventInputs.current.name);
-  const [category, handleCategoryChange] = useInput(
-    eventInputs.current.category
-  );
-  const [contents, handleEventContentChange] = useInput(
-    eventInputs.current.contents
-  );
-  const [images, setImages] = useState("");
-  const [date, setDate] = useState(eventInputs.current.date);
+  const { id } = useParams();
   const handleSubmitEventForm = () => {
-    console.log(date);
-
-    eventInputs.current = {
-      name: name,
-      category: category,
-      contents: contents,
-      date: date,
-    };
-    setStep(2);
+    alert("수정사항이 저장되었습니다.");
   };
+  useEffect(() => {
+    EventService.getEventDetail(id)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          let event = res.data;
 
-  const back = () => {
-    setStep(0);
-  };
-
+          setName(event.event_name);
+          setCategory(event.event_category);
+          setContents(event.event_content);
+          setImages(event.images);
+          setDate(new Date(event.event_date));
+          setDate(event.loc);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <EventFormLayout>
-      <SvgIcon src={BackIconSrc} onClick={back} size={"30px"} />
-      <SizedBox height={"30px"} />
-      <Subtitle> 2 / 3 단계 </Subtitle>
-      <Title>이벤트 기본 정보</Title>
+      <Title>행사 개요</Title>
       <SizedBox height={"50px"} />
       <Form>
         <Box>
@@ -60,7 +57,7 @@ export default function EventForm({ setStep, eventInputs }) {
 
           <Input value={name} onChange={handleNameChange} />
 
-          <ImagePicker images={images} setImages={setImages} />
+          <ImagePicker images={images} setImage={setImages} />
         </Box>
         <Box>
           <BodyRegular>카테고리</BodyRegular>
@@ -83,7 +80,7 @@ export default function EventForm({ setStep, eventInputs }) {
           <Input />
         </Box>
       </Form>
-      <SquareBtn onClick={handleSubmitEventForm}>다음</SquareBtn>
+      <SquareBtn onClick={handleSubmitEventForm}>저장</SquareBtn>
     </EventFormLayout>
   );
 }
@@ -101,7 +98,7 @@ const EventFormLayout = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  padding-bottom: 44px;
+  padding: 50px 0;
   width: 100%;
 `;
 const Box = styled.div`
